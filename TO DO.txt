@@ -1,0 +1,1 @@
+alter screen shots so they appear nicely in wordpress native installer
