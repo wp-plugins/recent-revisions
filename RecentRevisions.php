@@ -2,8 +2,8 @@
 /***************************************************************************
 
 Plugin Name:  Recent Revisions
-Plugin URI:   http://wordpress.org/extend/plugins/recent-revisions/
-Version:      1.0
+Plugin URI:   http://sarahbird.org/recent-revisions
+Version:      1.0.4
 Author:       Sarah Bird
 Author URI:   http://www.sarahbird.org/
 Description:  Shows an overview of your recent post revisions on your administration dashboard. 

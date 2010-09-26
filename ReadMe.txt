@@ -1,9 +1,9 @@
 === Recent Revisions ===
 Plugin Name: Recent Revisions
-Tags: revisions, summary, posts, post revisions, dashboard, admin, revision overview
+Tags: revision, revision control, summary, posts, post revisions, dashboard, admin, revision overview
 Requires at least: 2.7
 Tested up to: 3.0.1
-Stable tag: 1.0
+Stable tag: 1.0.4
 Contributors: birdsarah
 Donate link: http://www.sarahbird.org/recent-revisions
 
@@ -40,6 +40,12 @@ Then select Dashboard and ensure your RecentRevisions are visible by selecting â
 Well it's v1.0 so hard to say right now! Ask me questions and I'll answer them.
 
 == ChangeLog ==
-**Version 1.0**
+**v1.0.4
+
+* Really minor formatting changes
+
+**v1.0**
 
 * First time out - feedback welcome.
+
+
