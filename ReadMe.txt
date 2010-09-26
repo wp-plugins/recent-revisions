@@ -40,7 +40,7 @@ Then select Dashboard and ensure your RecentRevisions are visible by selecting â
 Well it's v1.0 so hard to say right now! Ask me questions and I'll answer them.
 
 == ChangeLog ==
-**v1.0.4
+**v1.0.4**
 
 * Really minor formatting changes
 
