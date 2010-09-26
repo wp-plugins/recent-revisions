@@ -1,1 +1,4 @@
 alter screen shots so they appear nicely in wordpress native installer
+bold the last bit of installation instructions
+change donate link so it goes directly to paypal
+add "version control" "versioning" "wiki" to tags	
