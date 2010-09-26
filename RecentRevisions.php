@@ -3,7 +3,7 @@
 
 Plugin Name:  Recent Revisions
 Plugin URI:   http://sarahbird.org/recent-revisions
-Version:      1.0.4
+Version:      1.0.5
 Author:       Sarah Bird
 Author URI:   http://www.sarahbird.org/
 Description:  Shows an overview of your recent post revisions on your administration dashboard. 
