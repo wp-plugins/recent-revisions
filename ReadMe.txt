@@ -1,10 +1,10 @@
 === Recent Revisions ===
 Plugin Name: Recent Revisions
-Tags: revision, revision control, summary, posts, post revisions, dashboard, admin, revision overview
+Tags: revision, revision control, summary, posts, post revisions, dashboard, admin, revision overview, version control, versioning, wiki
 Requires at least: 2.7
-Tested up to: 3.0.1
+Tested up to: 3.3.1
 Stable tag: 1.0.5
-Contributors: birdsarah
+Contributors: birdsarah, benjamin4
 Donate link: http://www.sarahbird.org/recent-revisions
 
 == Description ==
