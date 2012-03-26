@@ -3,13 +3,13 @@
 
 Plugin Name:  Recent Revisions
 Plugin URI:   http://sarahbird.org/recent-revisions
-Version:      1.0.5
+Version:      1.1
 Author:       Sarah Bird
 Author URI:   http://www.sarahbird.org/
 Description:  Shows an overview of your recent post revisions on your administration dashboard. 
 Ideal for sites with content that gets updated by multiple authors where you want to keep an eye 
 on the changes that have been made. Number of revisions displayed is configurable as well whether
-you want the author and the date shown. Posts are displayed in GMT to enable effective 
+you want the author and the date shown. Posts can be displayed in GMT to enable effective 
 collaboration across timezones.
 
 **************************************************************************/
@@ -44,24 +44,47 @@ load_plugin_textdomain( 'recent-revisions', '/wp-content/plugins/recent-revision
   
   $widget_options = RecentRevisions_Options();
 	
-  $request = "SELECT $wpdb->posts.*, display_name as authorname FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->posts.post_author=$wpdb->users.ID WHERE post_type ='revision' ";
-  $request .= "ORDER BY post_modified_gmt DESC LIMIT ".$widget_options['items'];
+  $request = 	"SELECT $wpdb->posts.*, display_name as authorname " . 
+  				"FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->posts.post_author=$wpdb->users.ID " .
+  				"WHERE post_type='post' OR (post_type ='revision' AND post_name NOT LIKE '%-autosave') ";
+  $request .= 	"ORDER BY post_modified_gmt DESC " .
+  				"LIMIT ".$widget_options['items'];
   $posts = $wpdb->get_results($request);	
 
+  // Use Date format of WP Preferences
+  $date_format = get_option('date_format') . ' ' . get_option('time_format');
 		if ( $posts ) {
 			echo "				<ul id='recent-revisions-list'>\n";
 
 			foreach ( $posts as $post ) {
+				$post_id = ($post->post_type == 'post') ? $post->ID : $post->post_parent;
+
 					//make the line			 	   
-			 	   $post_meta = sprintf('%s', '<a href="post.php?post=' . $post->post_parent . '&action=edit">' . get_the_title($post->post_parent) . '</a> ' );
+					$title = get_the_title($post_id);
+			 	   $post_meta = sprintf('%s', '<a href="post.php?post=' . $post_id . '&action=edit">' . ($title ? $title : __('(no title)')) . '</a> ' );
         		
         			if($widget_options['showauthor']) {				
           		$post_meta.= sprintf( __('by %s', 'recent-revisions'),'<strong>'. $post->authorname .'</strong> ' );
           		}
           				
-       			if($widget_options['showdatetime']) {				
-          		$post_meta.= sprintf( __('&#8212; %s', 'recent-revisions'),'' . $post->post_modified_gmt . ' (GMT)' );
-          		}         
+       			if($widget_options['showdatetime']) {
+       			//	$post_meta .= $post->post_modified_gmt;
+	          		$post_meta.= sprintf( __('&#8212; %s', 'recent-revisions'),'' . get_post_modified_time($date_format, $widget_options['tz_gmt'], $post->ID, true));
+	          		if ($widget_options['tz_gmt'])
+	          			$post_meta .= ' GMT';
+       			}
+
+       			if ($widget_options['showdiff']) {
+       				$request = "SELECT ID FROM $wpdb->posts WHERE post_type='revision' AND post_parent=" . $post_id . ' AND post_modified_gmt < "' . $post->post_modified_gmt . '" ORDER BY post_modified_gmt DESC LIMIT 1 ';
+       				$rev = $wpdb->get_row($request);
+       				if (is_null($rev)) // No previous revision found
+       					$post_meta .= ' (' . __('new', 'recent-revisions') . ')';
+       				else
+       				{
+       					$prevId = $rev->ID;
+       					$post_meta .= ' (<a href="revision.php?action=diff&post_type=page&right=' . $post->ID . '&left=' . $prevId . '">' . __('diff', 'recent-revisions') . '</a>)';
+       				}
+       			}
 					
 					//print it out
 					?>	<li class='post-meta'>	<?php echo $post_meta; ?>	</li> <?php
@@ -71,19 +94,19 @@ load_plugin_textdomain( 'recent-revisions', '/wp-content/plugins/recent-revision
 		
 		//but if you got no lines....
 		} else {
-				//echo '<p>' . __( "You don't have any revisions! Are revisions enabled in wp-config.php? Check that WP_POST_REVISIONS is true or >0. ", 'recent-revisions' ) . "</p>\n";
-				echo "<p> You don't have any revisions! Are revisions enabled in wp-config.php? Check that WP_POST_REVISIONS is true or >0. </p>\n";
+				echo '<p>' . __( "You don't have any revisions! Are revisions enabled in wp-config.php? Check that WP_POST_REVISIONS is true or >0. ", 'recent-revisions' ) . "</p>\n";
+				//echo "<p> You don't have any revisions! Are revisions enabled in wp-config.php? Check that WP_POST_REVISIONS is true or >0. </p>\n";
 		}
 
 }
 
 
 function RecentRevisions_Init() {
-	wp_add_dashboard_widget( 'RecentRevisions', __( 'Recent Revisions' ), 'RecentRevisions', 'RecentRevisions_Setup');
+	wp_add_dashboard_widget( 'RecentRevisions', __( 'Recent Revisions', 'recent-revisions' ), 'RecentRevisions', 'RecentRevisions_Setup');
 }
 
 function RecentRevisions_Options() {
-	$defaults = array( 'items' => 25, 'showdatetime' => 1, 'showauthor' => 1);
+	$defaults = array( 'items' => 25, 'showdatetime' => 1, 'showauthor' => 1, 'tz_gmt' => 0, 'showdiff' => 0);
 	if ( ( !$options = get_option( 'RecentRevisions' ) ) || !is_array($options) )
 		$options = array();
 	return array_merge( $defaults, $options );
@@ -95,8 +118,8 @@ function RecentRevisions_Setup() {
 
 
 	if ( 'post' == strtolower($_SERVER['REQUEST_METHOD']) && isset( $_POST['widget_id'] ) && 'RecentRevisions' == $_POST['widget_id'] ) {
-		foreach ( array( 'items', 'showdatetime', 'showauthor' ) as $key )
-				$options[$key] = $_POST[$key];
+		foreach ( array( 'items', 'showdatetime', 'showauthor', 'tz_gmt', 'showdiff' ) as $key )
+				$options[$key] = (int) @$_POST[$key];
 		update_option( 'RecentRevisions', $options );
 	}
 		
@@ -123,6 +146,18 @@ function RecentRevisions_Setup() {
 		<label for="showdatetime">
 			<input id="showdatetime" name="showdatetime" type="checkbox" value="1"<?php if ( 1 == $options['showdatetime'] ) echo ' checked="checked"'; ?> />
 			<?php _e('Show revision date and time?', 'recent-revisions' ); ?>
+		</label>
+	</p>
+   <p>
+		<label for="tz_gmt">
+			<input id="tz_gmt" name="tz_gmt" type="checkbox" value="1"<?php if ( 1 == $options['tz_gmt'] ) echo ' checked="checked"'; ?> />
+			<?php _e('Show date/time in GMT, not local timezone?', 'recent-revisions' ); ?>
+		</label>
+	</p>
+   <p>
+		<label for="showdiff">
+			<input id="showdiff" name="showdiff" type="checkbox" value="1"<?php if ( 1 == $options['showdiff'] ) echo ' checked="checked"'; ?> />
+			<?php _e('Show link to view differences?', 'recent-revisions' ); ?>
 		</label>
 	</p>
 	

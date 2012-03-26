@@ -1,0 +1,80 @@
+# Copyright (C) 2012 Recent Revisions
+# This file is distributed under the same license as the Recent Revisions package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Recent Revisions 1.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/recent-revisions\n"
+"POT-Creation-Date: 2012-03-21 08:28:23+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-03-21 10:10+0100\n"
+"Last-Translator: Benjamin\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: recent-revisions.php:64
+msgid "(no title)"
+msgstr ""
+
+#: recent-revisions.php:67
+msgid "by %s"
+msgstr "von %s"
+
+#: recent-revisions.php:72
+msgid "&#8212; %s"
+msgstr "&#8212; %s"
+
+#: recent-revisions.php:81
+msgid "new"
+msgstr "neu"
+
+#: recent-revisions.php:85
+msgid "diff"
+msgstr "diff"
+
+#: recent-revisions.php:97
+msgid "You don't have any revisions! Are revisions enabled in wp-config.php? Check that WP_POST_REVISIONS is true or >0. "
+msgstr "Es sind keine Posts oder Änderungen vorhanden! Ist die Änderungsverfolgung aktiviert? Überprüfe, ob WP_POST_REVISIONS true oder größer als 0 ist."
+
+#. #-#-#-#-#  recent-revisions.pot (Recent Revisions 1.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: recent-revisions.php:105
+msgid "Recent Revisions"
+msgstr "Letzte Änderungen"
+
+#: recent-revisions.php:128
+msgid "How many recent posts would you like to display?"
+msgstr "Wie viele letzten Änderungen möchtest du anzeigen?"
+
+#: recent-revisions.php:141
+msgid "Show revision author?"
+msgstr "Zeige den Autor der Änderung?"
+
+#: recent-revisions.php:148
+msgid "Show revision date and time?"
+msgstr "Zeige Datum und Zeit der Änderung?"
+
+#: recent-revisions.php:154
+msgid "Show date/time in GMT, not local timezone?"
+msgstr "Zeige das Datum und die Zeit in GMT, nicht in der lokalen Zeitzone?"
+
+#: recent-revisions.php:160
+msgid "Show link to view differences?"
+msgstr "Zeige Link auf Vergleichsansicht (diff)?"
+
+#. Plugin URI of the plugin/theme
+msgid "http://sarahbird.org/recent-revisions"
+msgstr "http://sarahbird.org/recent-revisions"
+
+#. Description of the plugin/theme
+msgid "Shows an overview of your recent post revisions on your administration dashboard."
+msgstr "Zeigt eine Übersicht der letzten Änderungen deiner Artikel und Seiten in dem Admin-Board."
+
+#. Author of the plugin/theme
+msgid "Sarah Bird"
+msgstr "Sarah Bird"
+
+#. Author URI of the plugin/theme
+msgid "http://www.sarahbird.org/"
+msgstr "http://www.sarahbird.org/"
+
