@@ -1,3 +1,9 @@
 alter screen shots so they appear nicely in wordpress native installer
 bold the last bit of installation instructions
 change donate link so it goes directly to paypal
+
+== Release Procedure ==
+1. Update ReadMe.txt (Stable Tag, Changelog)
+2. Update Screenshots
+3. Update Version Nb in RecentRevisions.php
+4. Commit and Tag version
