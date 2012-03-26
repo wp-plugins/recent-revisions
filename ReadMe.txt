@@ -3,7 +3,7 @@ Plugin Name: Recent Revisions
 Tags: revision, revision control, summary, posts, post revisions, dashboard, admin, revision overview, version control, versioning, wiki
 Requires at least: 2.7
 Tested up to: 3.3.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 Contributors: birdsarah, benjamin4
 Donate link: http://www.sarahbird.org/recent-revisions
 
@@ -35,11 +35,16 @@ Then select Dashboard and **ensure your RecentRevisions are visible by selecting
 == Screenshots ==
 1. Recent Revisions Dashboard View
 2. Recent Revisions Options
+3. Recent Revisions Dashboard (De)Activate
 
 == Frequently Asked Questions ==
 Well it's v1.0 so hard to say right now! Ask me questions and I'll answer them.
 
 == ChangeLog ==
+**v1.1.1**
+* Fix: Exclude Auto Drafts
+* Update Screenshots
+
 **v1.1**
 
 * New option: Use GMT or local timezone

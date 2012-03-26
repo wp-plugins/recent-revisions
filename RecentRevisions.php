@@ -3,7 +3,7 @@
 
 Plugin Name:  Recent Revisions
 Plugin URI:   http://sarahbird.org/recent-revisions
-Version:      1.1
+Version:      1.1.1
 Author:       Sarah Bird
 Author URI:   http://www.sarahbird.org/
 Description:  Shows an overview of your recent post revisions on your administration dashboard.
@@ -46,7 +46,8 @@ function RecentRevisions() {
 
 	$request = 	"SELECT $wpdb->posts.*, display_name as authorname " .
   				"FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->posts.post_author=$wpdb->users.ID " .
-  				"WHERE post_type='post' OR (post_type ='revision' AND post_name NOT LIKE '%-autosave') ";
+  				"WHERE (post_type='post' OR (post_type ='revision' AND post_name NOT LIKE '%-autosave')) " .
+				"AND post_status IN('publish', 'inherit')";
 	$request .= 	"ORDER BY post_modified_gmt DESC " .
   				"LIMIT ".$widget_options['items'];
 	$posts = $wpdb->get_results($request);
