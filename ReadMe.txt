@@ -41,7 +41,9 @@ Then select Dashboard and **ensure your RecentRevisions are visible by selecting
 Well it's v1.0 so hard to say right now! Ask me questions and I'll answer them.
 
 == ChangeLog ==
+
 **v1.1.1**
+
 * Fix: Exclude Auto Drafts
 * Update Screenshots
 
