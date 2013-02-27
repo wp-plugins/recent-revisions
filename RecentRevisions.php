@@ -4,7 +4,9 @@
 Plugin Name:  Recent Revisions
 Plugin URI:   http://sarahbird.org/recent-revisions
 Version:      1.1.1
-Author:       Sarah Bird
+Author:       Sarah Bird, Benjamin Pick
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Author URI:   http://www.sarahbird.org/
 Description:  Shows an overview of your recent post revisions on your administration dashboard.
 Ideal for sites with content that gets updated by multiple authors where you want to keep an eye
@@ -36,7 +38,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 
 // Load up the localization file if we're using WordPress in a different language
 // Place it in this plugin's folder and name it "recent-revisions-[value in wp-config].mo"
-load_plugin_textdomain( 'recent-revisions', '/wp-content/plugins/recent-revisions' );
+load_plugin_textdomain( 'recent-revisions', false, 'recent-revisions/' );
 
 function RecentRevisions() {
 

@@ -2,8 +2,10 @@
 Plugin Name: Recent Revisions
 Tags: revision, revision control, summary, posts, post revisions, dashboard, admin, revision overview, version control, versioning, wiki
 Requires at least: 2.7
-Tested up to: 3.3.1
+Tested up to: 3.5.1
 Stable tag: 1.1.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Contributors: birdsarah, benjamin4
 Donate link: http://www.sarahbird.org/recent-revisions
 
