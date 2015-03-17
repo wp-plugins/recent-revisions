@@ -65,5 +65,3 @@ Well it's v1.0 so hard to say right now! Ask me questions and I'll answer them.
 **v1.0**
 
 * First time out - feedback welcome.
-
-
